@@ -1,4 +1,6 @@
-﻿namespace GSWPlayerStatTracker.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GSWPlayerStatTracker.Models
 {
     public class Player
     {
@@ -10,10 +12,13 @@
         public string? Position { get; set; }
         public string? Photo { get; set; }
 
+        
+        
+        
         // Parent
         public Team? Team { get; set; }
-
         public string? TeamName { get; set; }
+
     }
 }
 

@@ -1,10 +1,10 @@
 ﻿@model GSWPlayerStatTracker.Models.Player
 
 @{
-    ViewData["Title"] = "Player Details";
+    ViewData["Title"] = "Details";
 }
 
-<h1 class="text-center">Player Details</h1>
+<h1>Details</h1>
 
 <div>
     <h4>Player</h4>
@@ -54,7 +54,7 @@
         </dd>
     </dl>
 </div>
-<div class="btn btn-primary">
+<div>
     <a asp-action="Edit" asp-route-id="@Model?.PlayerId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
