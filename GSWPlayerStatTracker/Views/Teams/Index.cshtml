@@ -1,15 +1,16 @@
 ﻿@model IEnumerable<GSWPlayerStatTracker.Models.Team>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Teams List";
 }
 
-<h1>Index</h1>
+<h1 class="text-center">List of Teams</h1>
+<p>Following are the respective NBA Teams as acknowledged by the National Basketball Association as of 2022.</p>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p class="btn btn-dark text-white">
+    <a asp-action="Create">Add a Team</a>
 </p>
-<table class="table">
+<table class="table table-dark">
     <thead>
         <tr>
             <th>
