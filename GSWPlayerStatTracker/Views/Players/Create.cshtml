@@ -1,16 +1,16 @@
 ﻿@model GSWPlayerStatTracker.Models.Player
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add Player";
 }
 
-<h1 class="text-center">Create Player</h1>
+<h1 class="text-center"> Add New Player</h1>
 
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="PlayerName" class="control-label"></label>
@@ -39,7 +39,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Photo" class="control-label"></label>
-                <input asp-for="Photo" class="form-control" />
+                <input asp-for="Photo" class="form-control" type="file"/>
                 <span asp-validation-for="Photo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -48,14 +48,14 @@
                 <span asp-validation-for="TeamName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary mt-1" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary mt-1">Back to List</a>
 </div>
 
 @section Scripts {
