@@ -22,18 +22,20 @@ namespace GSWPlayerStatTracker.Controllers
         // GET: Players
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Player.ToListAsync());
+            var applicationDbContext = _context.Players.Include(p => p.Team);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Players/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Player == null)
+            if (id == null || _context.Players == null)
             {
                 return NotFound();
             }
 
-            var player = await _context.Player
+            var player = await _context.Players
+                .Include(p => p.Team)
                 .FirstOrDefaultAsync(m => m.PlayerId == id);
             if (player == null)
             {
@@ -46,6 +48,7 @@ namespace GSWPlayerStatTracker.Controllers
         // GET: Players/Create
         public IActionResult Create()
         {
+            ViewData["TeamId"] = new SelectList(_context.Teams, "TeamId", "TeamName");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace GSWPlayerStatTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlayerName,PlayerId,PlayerHeight,Age,PointsPerGame,Position,Photo,TeamName")] Player player)
+        public async Task<IActionResult> Create([Bind("PlayerName,PlayerId,PlayerHeight,Age,PointsPerGame,Position,Photo,TeamId")] Player player)
         {
             if (ModelState.IsValid)
             {
@@ -62,22 +65,24 @@ namespace GSWPlayerStatTracker.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["TeamId"] = new SelectList(_context.Teams, "TeamId", "TeamName", player.TeamId);
             return View(player);
         }
 
         // GET: Players/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Player == null)
+            if (id == null || _context.Players == null)
             {
                 return NotFound();
             }
 
-            var player = await _context.Player.FindAsync(id);
+            var player = await _context.Players.FindAsync(id);
             if (player == null)
             {
                 return NotFound();
             }
+            ViewData["TeamId"] = new SelectList(_context.Teams, "TeamId", "TeamName", player.TeamId);
             return View(player);
         }
 
@@ -86,7 +91,7 @@ namespace GSWPlayerStatTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, [Bind("PlayerName,PlayerId,PlayerHeight,Age,PointsPerGame,Position,Photo,TeamName")] Player player)
+        public async Task<IActionResult> Edit(int? id, [Bind("PlayerName,PlayerId,PlayerHeight,Age,PointsPerGame,Position,Photo,TeamId")] Player player)
         {
             if (id != player.PlayerId)
             {
@@ -113,18 +118,20 @@ namespace GSWPlayerStatTracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["TeamId"] = new SelectList(_context.Teams, "TeamId", "TeamName", player.TeamId);
             return View(player);
         }
 
         // GET: Players/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Player == null)
+            if (id == null || _context.Players == null)
             {
                 return NotFound();
             }
 
-            var player = await _context.Player
+            var player = await _context.Players
+                .Include(p => p.Team)
                 .FirstOrDefaultAsync(m => m.PlayerId == id);
             if (player == null)
             {
@@ -139,14 +146,14 @@ namespace GSWPlayerStatTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int? id)
         {
-            if (_context.Player == null)
+            if (_context.Players == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Player'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Players'  is null.");
             }
-            var player = await _context.Player.FindAsync(id);
+            var player = await _context.Players.FindAsync(id);
             if (player != null)
             {
-                _context.Player.Remove(player);
+                _context.Players.Remove(player);
             }
             
             await _context.SaveChangesAsync();
@@ -155,7 +162,7 @@ namespace GSWPlayerStatTracker.Controllers
 
         private bool PlayerExists(int? id)
         {
-          return _context.Player.Any(e => e.PlayerId == id);
+          return _context.Players.Any(e => e.PlayerId == id);
         }
     }
 }

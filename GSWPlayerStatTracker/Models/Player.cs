@@ -17,7 +17,7 @@ namespace GSWPlayerStatTracker.Models
         
         // Parent
         public Team? Team { get; set; }
-        public string? TeamName { get; set; }
+        public int TeamId { get; set; }
 
     }
 }

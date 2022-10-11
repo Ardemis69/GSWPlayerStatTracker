@@ -22,18 +22,18 @@ namespace GSWPlayerStatTracker.Controllers
         // GET: Teams
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Team.ToListAsync());
+              return View(await _context.Teams.ToListAsync());
         }
 
         // GET: Teams/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Team == null)
+            if (id == null || _context.Teams == null)
             {
                 return NotFound();
             }
 
-            var team = await _context.Team
+            var team = await _context.Teams
                 .FirstOrDefaultAsync(m => m.TeamId == id);
             if (team == null)
             {
@@ -68,12 +68,12 @@ namespace GSWPlayerStatTracker.Controllers
         // GET: Teams/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Team == null)
+            if (id == null || _context.Teams == null)
             {
                 return NotFound();
             }
 
-            var team = await _context.Team.FindAsync(id);
+            var team = await _context.Teams.FindAsync(id);
             if (team == null)
             {
                 return NotFound();
@@ -119,12 +119,12 @@ namespace GSWPlayerStatTracker.Controllers
         // GET: Teams/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Team == null)
+            if (id == null || _context.Teams == null)
             {
                 return NotFound();
             }
 
-            var team = await _context.Team
+            var team = await _context.Teams
                 .FirstOrDefaultAsync(m => m.TeamId == id);
             if (team == null)
             {
@@ -139,14 +139,14 @@ namespace GSWPlayerStatTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Team == null)
+            if (_context.Teams == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Team'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Teams'  is null.");
             }
-            var team = await _context.Team.FindAsync(id);
+            var team = await _context.Teams.FindAsync(id);
             if (team != null)
             {
-                _context.Team.Remove(team);
+                _context.Teams.Remove(team);
             }
             
             await _context.SaveChangesAsync();
@@ -155,7 +155,7 @@ namespace GSWPlayerStatTracker.Controllers
 
         private bool TeamExists(int id)
         {
-          return _context.Team.Any(e => e.TeamId == id);
+          return _context.Teams.Any(e => e.TeamId == id);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace GSWPlayerStatTracker.Data
             : base(options)
         {
         }
-        public DbSet<GSWPlayerStatTracker.Models.Player> Player { get; set; }
-        public DbSet<GSWPlayerStatTracker.Models.Team> Team { get; set; }
+        public DbSet<GSWPlayerStatTracker.Models.Player> Players { get; set; }
+        public DbSet<GSWPlayerStatTracker.Models.Team> Teams { get; set; }
     }
 }

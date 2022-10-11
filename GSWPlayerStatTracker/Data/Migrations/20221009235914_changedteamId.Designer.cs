@@ -4,6 +4,7 @@ using GSWPlayerStatTracker.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GSWPlayerStatTracker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221009235914_changedteamId")]
+    partial class changedteamId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +57,7 @@ namespace GSWPlayerStatTracker.Data.Migrations
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("Players");
+                    b.ToTable("Player");
                 });
 
             modelBuilder.Entity("GSWPlayerStatTracker.Models.Team", b =>
@@ -77,7 +79,7 @@ namespace GSWPlayerStatTracker.Data.Migrations
 
                     b.HasKey("TeamId");
 
-                    b.ToTable("Teams");
+                    b.ToTable("Team");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
