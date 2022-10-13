@@ -24,3 +24,17 @@ table.sortable th:hover{
 .sorttable_nosort :hover{
     cursor: default !important;
 }
+
+#homePage {
+    
+    background-image: url("https://images8.alphacoders.com/108/thumb-1920-1084924.png")
+    
+}
+#homediv{
+    font-size: 30px;
+    font-weight:bolder;
+}
+#footer{
+    font-size: 20px;
+    font-weight:500;
+}

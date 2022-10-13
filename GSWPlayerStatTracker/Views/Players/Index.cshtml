@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<GSWPlayerStatTracker.Models.Player>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Player List";
 }
 
-<h1>Index</h1>
+<p class="text-center text-decoration-underline">This is the Player Roster with respect to their Teams as alloted by The National Basketball Association for the year 2022.</p>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Add Player</a>
 </p>
-<table class="table sortable">
+<table class="table sortable table-dark">
     <thead>
         <tr>
             <th>
@@ -58,7 +58,7 @@
                 @Html.DisplayFor(modelItem => item.Photo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Team.TeamId)
+                @Html.DisplayFor(modelItem => item.Team.TeamName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PlayerId">Edit</a> |
