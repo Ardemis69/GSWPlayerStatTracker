@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GSWPlayerStatTracker.Data;
 using GSWPlayerStatTracker.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GSWPlayerStatTracker.Controllers
 {
+    [Authorize]
     public class TeamsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -18,13 +20,13 @@ namespace GSWPlayerStatTracker.Controllers
         {
             _context = context;
         }
-
+        [AllowAnonymous]
         // GET: Teams
         public async Task<IActionResult> Index()
         {
               return View(await _context.Teams.ToListAsync());
         }
-
+        [AllowAnonymous]
         // GET: Teams/Details/5
         public async Task<IActionResult> Details(int? id)
         {

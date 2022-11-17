@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GSWPlayerStatTracker.Data;
 using GSWPlayerStatTracker.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GSWPlayerStatTracker.Controllers
 {
+    [Authorize]
     public class PlayersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,13 +21,14 @@ namespace GSWPlayerStatTracker.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         // GET: Players
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Players.Include(p => p.Team);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [AllowAnonymous]
         // GET: Players/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,6 +47,7 @@ namespace GSWPlayerStatTracker.Controllers
 
             return View(player);
         }
+
 
         // GET: Players/Create
         public IActionResult Create()
