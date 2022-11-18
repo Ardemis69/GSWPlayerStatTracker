@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GSWPlayerStatTracker.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     public class TeamsController : Controller
     {
         private readonly ApplicationDbContext _context;

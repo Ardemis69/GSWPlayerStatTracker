@@ -7,7 +7,10 @@
 <p class="text-center text-decoration-underline">This is the Player Roster with respect to their Teams as alloted by The National Basketball Association for the year 2022.</p>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Add Player</a>
+    @if (User.IsInRole("Administrator")) {
+        <a asp-action="Create" class="btn btn-primary">Add Player</a>
+    } 
+    
 </p>
 <table class="table sortable table-dark">
     <thead>
@@ -61,11 +64,12 @@
                 @Html.DisplayFor(modelItem => item.Team.TeamName)
             </td>
             <td>
-                   
-                    <a asp-action="Edit" asp-route-id="@item.PlayerId">Edit</a> |
+                   @if(User.IsInRole("Administrator")){
+                        <a asp-action="Edit" asp-route-id="@item.PlayerId">Edit</a>
                 
-                    <a asp-action="Delete" asp-route-id="@item.PlayerId">Delete</a> |
-                    
+                        <a asp-action="Delete" asp-route-id="@item.PlayerId">Delete</a>
+
+                   }
                     <a asp-action="Details" asp-route-id="@item.PlayerId">Details</a> 
             </td>
         </tr>
