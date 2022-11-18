@@ -6,6 +6,7 @@ namespace GSWPlayerStatTracker.Models
     public class Player
     {
         [Display(Name = "Name")]
+        [Required]
         public string? PlayerName { get; set; }
 
         public int? PlayerId { get; set; }
@@ -14,7 +15,8 @@ namespace GSWPlayerStatTracker.Models
 
         public int? Age { get; set; }
         [Display(Name = "Points Per Game")]
-        public int? PointsPerGame { get; set; }
+        [Required]
+        public decimal? PointsPerGame { get; set; }
         public string? Position { get; set; }
         public string? Photo { get; set; }
 
