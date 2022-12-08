@@ -131,7 +131,7 @@ namespace GSWPlayerStatTracker.Controllers
         {
             if (id == null || _context.Players == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             var player = await _context.Players
@@ -139,10 +139,10 @@ namespace GSWPlayerStatTracker.Controllers
                 .FirstOrDefaultAsync(m => m.PlayerId == id);
             if (player == null)
             {
-                return NotFound();
+                return View("404");
             }
 
-            return View(player);
+            return View("Delete",player);
         }
 
         // POST: Players/Delete/5
