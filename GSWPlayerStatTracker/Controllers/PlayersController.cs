@@ -152,7 +152,7 @@ namespace GSWPlayerStatTracker.Controllers
         {
             if (_context.Players == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Players'  is null.");
+                return View("NotFound");
             }
             var player = await _context.Players.FindAsync(id);
             if (player != null)
@@ -168,5 +168,7 @@ namespace GSWPlayerStatTracker.Controllers
         {
           return _context.Players.Any(e => e.PlayerId == id);
         }
+
+
     }
 }

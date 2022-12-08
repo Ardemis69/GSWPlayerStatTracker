@@ -34,7 +34,7 @@ namespace GSWPlayerStatTrackerTests
                 var player = new Player
                 {
                     TeamId = 10,
-              
+                    PlayerId= i,
                     PlayerName = "Player" + i.ToString(),
                     PointsPerGame = i+10,
                     Position = "Position" +i.ToString(),
@@ -93,11 +93,33 @@ namespace GSWPlayerStatTrackerTests
         [TestMethod]
         public void DeleteValidPlayer()
         {
-            var player =_context.Players.Find(1);
+            //var player =_context.Players.Find(1);
+            _context.Players = null;
+           
+            var result = (ViewResult)controller.DeleteConfirmed(2).Result;          
 
-            var result = controller.DeleteConfirmed(1).Result;
-
-            Assert.AreEqual(player, result);
+            Assert.AreEqual("NotFound", result.ViewName);
         }
+        [TestMethod]
+        public void DeleteRedirectsView()
+        {
+            var result = (RedirectToActionResult)controller.DeleteConfirmed(1).Result;
+
+            Assert.AreEqual("Index", result.ActionName);
+        }
+
+        [TestMethod]
+        public void DeletedPlayerNotNull()
+        {
+            Player player = new Player();
+            player.PlayerId= 1;
+            var ID = player.PlayerId;
+            //var delete = _context.Remove(player);
+
+            var result = controller.DeleteConfirmed(player.PlayerId).Result;
+
+            Assert.AreEqual(_context.Players.Remove(player),result);
+        }
+
     }
 }
