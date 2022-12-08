@@ -108,18 +108,6 @@ namespace GSWPlayerStatTrackerTests
             Assert.AreEqual("Index", result.ActionName);
         }
 
-        [TestMethod]
-        public void DeletedPlayerNotNull()
-        {
-            Player player = new Player();
-            player.PlayerId= 1;
-            var ID = player.PlayerId;
-            //var delete = _context.Remove(player);
-
-            var result = controller.DeleteConfirmed(player.PlayerId).Result;
-
-            Assert.AreEqual(_context.Players.Remove(player),result);
-        }
 
     }
 }
